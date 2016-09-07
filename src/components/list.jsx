@@ -1,7 +1,6 @@
 var React = require('react');
-var Fetch = require('whatwg-fetch');
 var Product = require('./product.jsx');
-var root = 'http://react.dev/react/';
+var Api = require('../utils/api.jsx');
 
 module.exports = React.createClass({
 	getInitialState: function() {
@@ -11,14 +10,9 @@ module.exports = React.createClass({
 		};
 	},
 	loadProducts: function() {
-		fetch(root + this.props.url, {
-
-		})
-		.then(function(response){
-			return response.json();
-		})
-		.then(function(data){
-			this.setState({products: data});
+		Api.get(this.props.url)
+		.then(function(json){
+			this.setState({products: json});
 		}.bind(this));
 	},
 	componentWillMount: function(){
