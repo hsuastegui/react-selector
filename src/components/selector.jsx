@@ -10,44 +10,29 @@ module.exports = React.createClass({
   	},
   	handleFilterChange: function(data){
   		//Get Filters State
-  		var filter = this.state.filters;
+  		var filters = this.state.filters;
 
-  		if(!(data.name in filter)){
- 			//Filter type hasn't been added, push initial value
-  			filter[data.name] = [data.filter];
+	 	if(data.type === 'radio'){
+	 		//Add/replace filter
+			filters[data.filter] = data.value;
 
-  		}else{
-  			//Filter type already exists
-  			if(data.type === 'radio'){
-  				//Only 1 option allow therefore substitute the value
-				filter[data.name] = [data.filter];
+		}else if(data.type === 'checkbox'){
+			if(data.checked){
+				//Add filter
+				filters[data.filter] = data.checked;
+
 			}else{
-				//Multiple options allowed, push options
-				var array = filter[data.name];
-				if(data.checked){
-					//Add option
-					array.push(data.filter);
-					filter[data.name] = array;
-					
-				}else{
-					//Remove option
-					var index = array.indexOf(data.filter);
-					if (index > -1) {
-					    var newArray = array.filter(function(value){
-					    	return value !== data.filter;
-					    });
-					    filter[data.name] = newArray;
-					}
-				}
+				//Remove filter
+				delete filters[data.filter];
 
 			}
-  		}
-  		//Pass Filter back to Parent
-  		this.props.onUserInput(filter);
+		}
+  		//Pass Filters back to Parent
+  		this.props.onUserInput(filters);
   	 	//Trigger Redux Action Update
-  		this.props.update(filter);
+  		this.props.update(filters);
   		//Update Internal Filters State
-  		this.setState({filters: filter});
+  		this.setState({filters: filters});
   	},
 	render: function(){
 		var handler = this.handleFilterChange;

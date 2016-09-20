@@ -13,7 +13,7 @@ module.exports = React.createClass({
 		var handler = this.handleChildChange;
 		var inputs = this.props.fields.map(function(input, index){
 	      return (
-	      	<Input onInputChange={handler} key={input.id} id={input.id} text={input.text} type={input.type} name={groupName} />
+	      	<Input onInputChange={handler} key={input.id} name={groupName} {...input} />
 	      );
 	    });
 		return (
