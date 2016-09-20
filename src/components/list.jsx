@@ -2,12 +2,13 @@ var React = require('react');
 var Reflux = require('reflux');
 var Product = require('./product.jsx');
 var ProductStore = require('../stores/product-store.jsx');
-var Actions = require('../actions.jsx');
+var FilterStore = require('../stores/filter-store.jsx');
 var _filter = require('lodash.filter');
 
 module.exports = React.createClass({
 	mixins: [
-		Reflux.listenTo(ProductStore, 'onStoreChange')
+		Reflux.listenTo(ProductStore, 'onProductLoad'),
+    	Reflux.listenTo(FilterStore, 'onFilterUpdate')
 	],
 	getInitialState: function() {
 		return {
@@ -15,20 +16,9 @@ module.exports = React.createClass({
 			filters: {}
 		};
 	},
-	componentWillMount: function(){
-		//ProductStore.getProducts();
-		Actions.getProducts();
-	},
-	componentDidMount: function() {
-		//Listen for Redux Action Update
-	    this.props.update.listen(function(data){
-	    	//Update Internal State
-	    	this.setState({filters: data});
-	    }.bind(this));
-	},
 	render: function(){
-		var filters = this.state.filters; //From Redux Action
-		//var filters = this.props.filters; //From Parent State
+		//From Redux Action
+		var filters = this.state.filters;
 		
 		return (
 			<div className="row products">
@@ -48,9 +38,10 @@ module.exports = React.createClass({
 			return <Product key={item.sku} item={item} />
 		});
 	},
-	onStoreChange: function(event, products){
-		this.setState({
-			products: products
-		});
+	onProductLoad: function(event, products){
+		this.setState({products: products});
+	},
+	onFilterUpdate: function(event){
+		this.setState({filters: FilterStore.filters});
 	}
 });

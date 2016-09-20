@@ -5,17 +5,12 @@ module.exports = React.createClass({
 	getInitialState: function(){
 		return { show: true };
 	},
-	handleChildChange: function(data){
-		this.props.onFilterChange(data);
-	},
 	render: function(){
 		var groupName = this.props.name;
-		var handler = this.handleChildChange;
 		var inputs = this.props.fields.map(function(input, index){
-	      return (
-	      	<Input onInputChange={handler} key={input.id} name={groupName} {...input} />
-	      );
+	      return <Input key={input.id} name={groupName} {...input} />
 	    });
+	    
 		return (
 	      <div className={this.state.show ? 'row section visible' : 'row section'}>
 	      	<div className="title columns small-12">

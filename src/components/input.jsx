@@ -1,7 +1,9 @@
 var React = require('react');
+var Actions = require('../actions.jsx');
+
 module.exports = React.createClass({
 	handleInputChange: function(e){
-		this.props.onInputChange({
+		Actions.updateFilters({
 			filter: e.target.dataset.filter,
 			value: e.target.value,
 			type: e.target.type,

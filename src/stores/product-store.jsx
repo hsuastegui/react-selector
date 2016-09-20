@@ -12,6 +12,6 @@ module.exports = Reflux.createStore({
 		}.bind(this));
 	},
 	triggerChange: function(){
-		this.trigger('change', this.products);
+		this.trigger('product_load', this.products);
 	}
 });
