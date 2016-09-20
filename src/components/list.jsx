@@ -1,22 +1,22 @@
 var React = require('react');
+var Reflux = require('reflux');
 var Product = require('./product.jsx');
-var Api = require('../utils/api.jsx');
+var ProductStore = require('../stores/product-store.jsx');
+var Actions = require('../actions.jsx');
 
 module.exports = React.createClass({
+	mixins: [
+		Reflux.listenTo(ProductStore, 'onStoreChange')
+	],
 	getInitialState: function() {
 		return {
 			products: [],
 			filters: {}
 		};
 	},
-	loadProducts: function() {
-		Api.get(this.props.url)
-		.then(function(json){
-			this.setState({products: json});
-		}.bind(this));
-	},
 	componentWillMount: function(){
-		this.loadProducts();
+		//ProductStore.getProducts();
+		Actions.getProducts();
 	},
 	componentDidMount: function() {
 		//Listen for Redux Action Update
@@ -30,7 +30,14 @@ module.exports = React.createClass({
 		//var filters = this.props.filters; //From Parent State
 		var size = Object.keys(filters).length;
 		
-		var productList = this.state.products.map(function(item){
+		return (
+			<div className="row products">
+				{this.renderProducts(filters, size)}
+			</div>
+		);
+	},
+	renderProducts: function(filters, size){
+		return this.state.products.map(function(item){
 			if(size > 0 ){
 				//Filters
 				var show = true;
@@ -56,10 +63,10 @@ module.exports = React.createClass({
 				);
 			}
 		}.bind(this));
-		return (
-			<div className="row products">
-				{productList}
-			</div>
-		);
+	},
+	onStoreChange: function(event, products){
+		this.setState({
+			products: products
+		});
 	}
 });
