@@ -1,13 +1,16 @@
-var React = require('react');
-var Input = require('./input.jsx');
+import React from 'react';
+import Input from './input';
 
-module.exports = React.createClass({
-	getInitialState: function(){
-		return { show: true };
-	},
-	render: function(){
-		var groupName = this.props.name;
-		var inputs = this.props.fields.map(function(input, index){
+class Group extends React.Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			show: true
+		};
+	}
+	render(){
+		const groupName = this.props.name;
+		const inputs = this.props.fields.map(function(input, index){
 	      return <Input key={input.id} name={groupName} {...input} />
 	    });
 	    
@@ -23,4 +26,5 @@ module.exports = React.createClass({
 	      </div>
 	    );
 	}
-});
+}
+export default Group;

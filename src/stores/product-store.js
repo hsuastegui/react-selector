@@ -1,8 +1,8 @@
-var Reflux = require('reflux');
-var Actions = require('../actions.jsx');
-var Api = require('../utils/api.jsx');
+import Reflux from 'reflux';
+import Actions from '../actions';
+import Api from '../utils/api';
 
-module.exports = Reflux.createStore({
+export default Reflux.createStore({
 	listenables: [Actions],
 	getProducts: function(){
 		return Api.get('products.json')

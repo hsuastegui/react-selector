@@ -1,4 +1,4 @@
-module.exports = [
+const options = [
 	{id: 1, title:"Tension", name:"tension", fields:[
 		{id:11, filter: "tension", text: "Soft", type: "radio"},
 		{id:12, filter: "tension", text: "Medium", type: "radio"},
@@ -22,3 +22,4 @@ module.exports = [
 		{id: 43, filter: "anti_roll_binary_springs", text: "Anti-roll Binary Springs", type: "checkbox"},
 	]}
 ];
+export default options;

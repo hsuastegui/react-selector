@@ -1,24 +1,41 @@
 {
-  "name": "react",
+  "name": "react-dev",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server --config ./webpack.config.js --hot --port 8881",
     "dev": "webpack -d --watch",
     "build": "webpack -p"
   },
-  "author": "",
+  "author": "Humberto Suastegui",
   "license": "ISC",
   "dependencies": {
+    "lodash.filter": "^4.6.0",
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1",
+    "reflux": "^0.4.1",
+    "whatwg-fetch": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "6.14.0",
+    "babel-core": "6.14.0",
     "babel-loader": "^6.2.5",
+    "babel-plugin-react-display-name": "2.0.0",
     "babel-preset-es2015": "^6.13.2",
     "babel-preset-react": "^6.11.1",
-    "lodash.filter": "^4.6.0",
-    "react": "^15.3.0",
-    "react-addons-css-transition-group": "^15.3.0",
-    "react-dom": "^15.3.0",
-    "reflux": "^0.4.1",
+    "babel-register": "6.8.0",
+    "css-loader": "^0.25.0",
+    "eslint": "3.4.0",
+    "eslint-plugin-import": "1.14.0",
+    "eslint-plugin-jsx-a11y": "2.2.0",
+    "eslint-plugin-react": "6.2.0",
+    "eslint-watch": "2.1.14",
+    "node-sass": "^3.10.0",
+    "react-addons-test-utils": "15.3.1",
+    "react-hot-loader": "^3.0.0-beta.5",
+    "sass-loader": "^4.0.2",
+    "style-loader": "^0.13.1",
     "webpack": "^1.13.2",
-    "whatwg-fetch": "^1.0.0"
+    "webpack-dev-server": "^1.16.1"
   }
 }

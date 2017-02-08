@@ -1,7 +1,7 @@
-var Fetch = require('whatwg-fetch');
-var rootUrl = 'http://react.dev/selector/';
+import Fetch from 'whatwg-fetch';
+var rootUrl = './';
 
-module.exports = {
+const api = {
   get: function(url) {
     return fetch(rootUrl + url,{
 
@@ -11,3 +11,5 @@ module.exports = {
     });
   }
 };
+
+export default api
